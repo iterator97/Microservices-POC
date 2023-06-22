@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace PlatformService.SyncDataServices.Http
 {
-    public class HttpCommandDataClient : ICommandDataClient
+    public class HttpCommandDataClient : IHttpCommandDataClient
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
@@ -21,7 +21,7 @@ namespace PlatformService.SyncDataServices.Http
 
             var response = await _httpClient.PostAsync($"{_configuration["CommandService"]}/api/c/platforms/", httpContent);
 
-            if(0 == response.StatusCode)
+            if(response.IsSuccessStatusCode)
             {
                 Console.WriteLine("Sync Post to CommandsServuce was OK!");
             }
