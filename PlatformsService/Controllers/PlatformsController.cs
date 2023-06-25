@@ -52,15 +52,15 @@ namespace PlatformService.Controllers
 
             var platformReadDto = _mapper.Map<PlatformReadDto>(newPlatform);
 
-            //try
-            //{
-            //    await _httpCommandDataClient.SendPlatformToCommand(platformReadDto);
-            //}
-            //catch (Exception e)
-            //{
+            try
+            {
+                await _httpCommandDataClient.SendPlatformToCommand(platformReadDto);
+            }
+            catch (Exception e)
+            {
 
-            //    Console.WriteLine($"Could not send synchronously: {e.Message}");
-            //}
+                Console.WriteLine($"Could not send synchronously: {e.Message}");
+            }
 
             return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id }, platformReadDto );
 
